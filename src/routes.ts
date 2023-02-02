@@ -1,12 +1,19 @@
 import { Express, Request, Response } from 'express';
-import { registerUser } from './controller/userController';
+import { check }  from 'express-validator';
+import { registerUser, authenticateUser } from './controller/userController';
 
 function routes(app: Express) {
   app.get('/healthcheck', (req: Request, res: Response) => {
     res.sendStatus(200);
   });
 
-  app.post('/register', registerUser);
+  app.post('/api/user/login', authenticateUser);
+
+  app.post('/api/user/register', [
+    check('username', 'Username cannot be empty').notEmpty(),
+    check('email', 'Email cannot be empty').isEmail(),
+    check('password', 'Password must be at least 5 chars long').isLength({ min: 5 }),
+  ], registerUser);
 }
 
 export default routes;
