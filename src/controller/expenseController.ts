@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-
 import { Expense } from '../models/expensesModel';
 import { IJwtToken } from './userController';
 

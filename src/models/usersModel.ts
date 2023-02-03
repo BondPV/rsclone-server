@@ -7,6 +7,7 @@ export interface IUser extends mongoose.Document {
   password: string;
   avatar?: string;
   language?: string;
+  phoneNumber?: number;
 }
 
 const userSchema = new mongoose.Schema({
@@ -15,6 +16,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   avatar: { type: String, default: defaultUserAvatar },
   language: { type: String, default: defaultLanguage },
+  phoneNumber: { type: Number },
+  _id: { type: mongoose.SchemaTypes.ObjectId },
 });
 
 export const User = mongoose.model<IUser>('users', userSchema);

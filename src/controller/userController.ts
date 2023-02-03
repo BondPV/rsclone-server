@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
@@ -33,6 +34,7 @@ export async function registerUser(req: Request, res: Response) {
     const hashPassword = bcrypt.hashSync(password, bcryptSaltRounds);
     
     await User.create({
+      _id: new mongoose.Types.ObjectId,
       email: email,
       username: username,
       password: hashPassword,
@@ -67,5 +69,24 @@ export async function authenticateUser(req: Request, res: Response) {
   } catch (error) {
     console.log(error);
     res.status(403).json({ message: 'Login error' });
+  }
+}
+
+export async function updateUser(req: Request, res: Response) {
+  try {
+    const userId = (req.user as IJwtToken).id;
+    const user = await User.findOneAndUpdate(
+      { '_id': userId },
+      { $set: { ...req.body } },
+      { returnDocument: 'after' });
+
+    if (user === null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(user);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
   }
 }

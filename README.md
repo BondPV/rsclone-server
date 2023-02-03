@@ -4,14 +4,13 @@
 
 - Use `node 16.x` or higher.
 - Install dependencies: `$ npm install`.
-- Start server: `$ npm dev`.
+- Start server: `$ npm run dev`.
 - Now you can send requests to the address: `http://localhost:3005/`
 
 ## Usage
 
 ## **User**
 
-***
 * ### *Registration*
   Creates a new user.
   <details>
@@ -43,12 +42,12 @@
     * **Code:** 403	Forbidden <br />
       **Content:** 
       ```json
-        { "message": "Registration error" } or { "message": "A user with {email} already exists" }
+        { "message": "Registration error" }
       ```
 
   </details>
+<br>
 
-***
 * ### *Authenticate (Login)*
   Login user.
   <details>
@@ -79,14 +78,59 @@
     * **Code:** 403	Forbidden <br />
       **Content:** 
       ```json
-        { "message": "Registration error" } or { "message": "Email {email} not found" } or { "message": "Invalid password, please try again!" }
+        { "message": "Login error" }
       ```
+
+  </details>
+<br>
+
+* ### *UpdateUser*
+  Updating user settings.
+  <details>
+
+  * **Method** `PATCH`
+
+  * **URL** `/api/user/`
+
+  * **Headers:** `"Content-Type": "aplication/json"`
+
+  * **Data Params**: 
+  ```typescript 
+    {
+      username?: string;
+      avatar?: string;
+      language?: string;
+      phoneNumber?: number;
+    } 
+  ```
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      {
+        "_id": "63dd3ecab0785798e9d18c75",
+        "email": "test1@clone.com",
+        "username": "test",
+        "password": "encoded password",
+        "avatar": "img url",
+        "language": "RU",
+        "phoneNumber": "89001000000"
+      }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
 
   </details>
 
 ## **Expense**
 
-***
 * ### *Create*
   Creates a new expense
   <details>
@@ -95,7 +139,9 @@
 
   * **URL** `/api/expense`
 
-  * **Headers:** `"Content-Type": "aplication/json"`
+  * **Headers:** 
+    * `"Content-Type": "aplication/json"`
+    * `"Authorization": "Bearer <-YOU TOKEN->"`
 
   * **Data Params**: 
   ```typescript 

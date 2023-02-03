@@ -11,5 +11,5 @@ export const tokenSettings = {
   time: '24h',
 };
 
-export const defaultLanguage = 'RUS'
+export const defaultLanguage = 'ru'
 export const defaultUserAvatar = 'https://github.com/BondPV/database/blob/main/images/avatarCatMoney.jpg?raw=true'
