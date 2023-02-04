@@ -1,7 +1,23 @@
 import { Express, Request, Response } from 'express';
 import { check }  from 'express-validator';
 import { registerUser, authenticateUser, updateUser } from './controller/userController';
-import { createExpense, updateExpense, deleteExpense, getExpense, getExpenses } from './controller/expenseController';
+
+import { 
+  createExpense,
+  updateExpense,
+  deleteExpense,
+  getExpense,
+  getExpenses, 
+} from './controller/expenseController';
+
+import { 
+  createIncome,
+  updateIncome,
+  deleteIncome,
+  getIncome,
+  getIncomes, 
+} from './controller/incomeController';
+
 import authValidate from './controller/authValidateController';
 
 function routes(app: Express) {
@@ -24,6 +40,12 @@ function routes(app: Express) {
   app.delete('/api/expense/:id', authValidate, deleteExpense);
   app.get('/api/expense/:id', getExpense);
   app.get('/api/expense', authValidate, getExpenses);
+
+  app.post('/api/income', authValidate, createIncome);
+  app.patch('/api/income/:id', authValidate, updateIncome);
+  app.delete('/api/income/:id', authValidate, deleteIncome);
+  app.get('/api/income/:id', getIncome);
+  app.get('/api/income', authValidate, getIncomes);
 }
 
 export default routes;

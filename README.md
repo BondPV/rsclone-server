@@ -314,8 +314,8 @@
       **Content:** 
       ```json
       [
-        { expense_1 },
-        { expense_n }
+        { expense-1 },
+        { expense-n }
       ]
       ```
   * **Error Response:**
@@ -327,4 +327,206 @@
     * **Code:** 400 Bad Request
 
   </details>
-<br />
+
+
+
+
+
+
+
+
+
+## **Income**
+
+* ### *Creat Income*
+  Creates a new money income
+  <details>
+
+  * **Method** `POST`
+
+  * **URL** `/api/income`
+
+  * **Headers:** 
+    * `"Content-Type": "aplication/json"`
+    * `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: 
+  ```typescript 
+    {
+      date: Date,
+      account: string,
+      income: number,
+      currency: string,
+      comment?: string,
+    }
+  ```
+
+  * **Success Response:**
+
+    * **Code:** 201 Created <br />
+      **Content:** 
+      ```json
+        {
+          "date": "2023-01-23T18:25:43.511Z",
+          "account": "cash",
+          "income": 100,
+          "currency": "RUB",
+          "comment": "",
+          "userId": "63de2f91f7216c0c8cb4f290",
+          "_id": "63de3fdbdafedd703299ad96",
+        }
+      ```
+  * **Error Response:**
+
+    * **Code:** 400 Bad Request <br />
+
+  </details>
+
+* ### *Update Income*
+  Updating income parametrs.
+  <details>
+
+  * **Method** `PATCH`
+
+  * **URL** `/api/income/:id`
+
+  * **Headers:** 
+    * `"Content-Type": "aplication/json"`
+    * `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: 
+  ```typescript 
+    {
+      date?: Date,
+      account?: string,
+      income?: number,
+      currency?: string,
+      comment?: string,
+    }
+  ```
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      {
+        "_id": "63de3fdbdafedd703299ad96",
+        "date": "2023-01-23T18:25:43.511Z",
+        "account": "cash",
+        "income": 100,
+        "currency": "RUB",
+        "comment": "",
+        "userId": "63de2f91f7216c0c8cb4f290",
+      }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
+
+* ### *Delete Income*
+  Delete one income by Id.
+  <details>
+
+  * **Method** `DELETE`
+
+  * **URL** `/api/income/:id`
+
+  * **Headers:**: `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: None
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      {
+        "response": "Income deleted successfully"
+      }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
+
+* ### *Get Income*
+  Get one income by Id.
+  <details>
+
+  * **Method** `GET`
+
+  * **URL** `/api/income/:id`
+
+  * **Headers:**: None
+
+  * **Data Params**: None
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      {
+        "_id": "63de3fdbdafedd703299ad96",
+        "date": "2023-01-23T18:25:43.511Z",
+        "account": "cash",
+        "income": 100,
+        "currency": "RUB",
+        "comment": "",
+        "userId": "63de2f91f7216c0c8cb4f290",
+        "__v": 0
+      }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
+
+* ### *Get Incomes* 
+  Get all user incomes.
+  <details>
+
+  * **Method** `GET`
+
+  * **URL** `/api/income`
+
+  * **Headers:**: `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: None
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      [
+        { income-1 },
+        { income-n }
+      ]
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
