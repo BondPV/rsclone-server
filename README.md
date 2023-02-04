@@ -314,8 +314,8 @@
       **Content:** 
       ```json
       [
-        { expense-1 },
-        { expense-n }
+        { "expense-1" },
+        { "expense-n" }
       ]
       ```
   * **Error Response:**
@@ -327,14 +327,6 @@
     * **Code:** 400 Bad Request
 
   </details>
-
-
-
-
-
-
-
-
 
 ## **Income**
 
@@ -517,8 +509,8 @@
       **Content:** 
       ```json
       [
-        { income-1 },
-        { income-n }
+        { "income-1" },
+        { "income-n" }
       ]
       ```
   * **Error Response:**
