@@ -35,3 +35,17 @@ export async function updateExpense(req: Request, res: Response) {
   }
 }
 
+export async function deleteExpense(req: Request, res: Response) {
+  try {
+    const expense = await Expense.findOneAndDelete({ '_id': req.params.id });
+
+    if (expense === null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json({ response: 'Expense deleted successfully' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+}

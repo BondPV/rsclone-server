@@ -179,3 +179,35 @@
 
   </details>
 <br />
+
+* ### *Delete Expense*
+  Delete one expense by Id.
+  <details>
+
+  * **Method** `DELETE`
+
+  * **URL** `/api/expense/:id`
+
+  * **Headers:**: `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: None
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      {
+        "response": "Expense deleted successfully"
+      }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
+<br />
