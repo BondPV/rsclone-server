@@ -84,7 +84,7 @@
   </details>
 <br>
 
-* ### *UpdateUser*
+* ### *Update User*
   Updating user settings.
   <details>
 
@@ -133,7 +133,7 @@
 
 ## **Expense**
 
-* ### *CreatExpense*
+* ### *Creat Expense*
   Creates a new expense
   <details>
 
@@ -159,7 +159,7 @@
 
   * **Success Response:**
 
-    * **Code:** 201	Created <br />
+    * **Code:** 201 Created <br />
       **Content:** 
       ```json
         {
@@ -175,7 +175,58 @@
       ```
   * **Error Response:**
 
-    * **Code:** 400	Bad Request <br />
+    * **Code:** 400 Bad Request <br />
+
+  </details>
+<br />
+
+* ### *Update Expense*
+  Updating expense parametrs.
+  <details>
+
+  * **Method** `PATCH`
+
+  * **URL** `/api/expense/:id`
+
+  * **Headers:** 
+    * `"Content-Type": "aplication/json"`
+    * `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: 
+  ```typescript 
+    {
+      date?: Date,
+      account?: string,
+      category?: string,
+      expense?: number,
+      currency?: string,
+      comment?: string,
+    }
+  ```
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+        {
+          "date": "2023-02-23T18:25:43.511Z",
+          "account": "cash",
+          "category": "food",
+          "expense": 100,
+          "currency": "RUB",
+          "comment": "supermarket Ashan",
+          "userId": "63db54fe7332880adf6fef95",
+          "_id": "63dde034bc46ae6546fcf533",
+        }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
 
   </details>
 <br />
@@ -199,6 +250,45 @@
       ```json
       {
         "response": "Expense deleted successfully"
+      }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
+<br />
+
+* ### *Get Expense*
+  Get one expense by Id.
+  <details>
+
+  * **Method** `GET`
+
+  * **URL** `/api/expense/:id`
+
+  * **Headers:**: None
+
+  * **Data Params**: None
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      {
+        "date": "2023-03-23T18:25:43.511Z",
+        "account": "cash",
+        "category": "food",
+        "expense": 100,
+        "currency": "RUB",
+        "comment": "supermarket",
+        "userId": "63dddea9bc46ae6546fcf52b",
+        "_id": "63dde034bc46ae6546fcf533",
       }
       ```
   * **Error Response:**

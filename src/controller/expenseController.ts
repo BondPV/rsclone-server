@@ -49,3 +49,18 @@ export async function deleteExpense(req: Request, res: Response) {
     res.sendStatus(400);
   }
 }
+
+export async function getExpense(req: Request, res: Response) {
+  try {
+    const expense = await Expense.findOne({ '_id': req.params.id });
+
+    if (expense === null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(expense);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+}
