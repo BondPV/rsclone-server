@@ -64,3 +64,19 @@ export async function getExpense(req: Request, res: Response) {
     res.sendStatus(400);
   }
 }
+
+export async function getExpenses(req: Request, res: Response) {
+  try {
+    const userId = (req.user as IJwtToken).id;
+    const expenses = await Expense.find({ 'userId': userId });
+
+    if (expenses.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(expenses);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+}

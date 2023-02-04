@@ -46,7 +46,6 @@
       ```
 
   </details>
-<br>
 
 * ### *Authenticate (Login)*
   Login user.
@@ -82,7 +81,6 @@
       ```
 
   </details>
-<br>
 
 * ### *Update User*
   Updating user settings.
@@ -178,7 +176,6 @@
     * **Code:** 400 Bad Request <br />
 
   </details>
-<br />
 
 * ### *Update Expense*
   Updating expense parametrs.
@@ -229,7 +226,6 @@
     * **Code:** 400 Bad Request
 
   </details>
-<br />
 
 * ### *Delete Expense*
   Delete one expense by Id.
@@ -261,7 +257,6 @@
     * **Code:** 400 Bad Request
 
   </details>
-<br />
 
 * ### *Get Expense*
   Get one expense by Id.
@@ -290,6 +285,38 @@
         "userId": "63dddea9bc46ae6546fcf52b",
         "_id": "63dde034bc46ae6546fcf533",
       }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
+
+* ### *Get Expenses* 
+  Get all user expenses.
+  <details>
+
+  * **Method** `GET`
+
+  * **URL** `/api/expense`
+
+  * **Headers:**: `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: None
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      [
+        { expense_1 },
+        { expense_n }
+      ]
       ```
   * **Error Response:**
 
