@@ -18,6 +18,7 @@ const expenseSchema = new mongoose.Schema({
   currency:  { type: String, required: true },
   comment: { type: String },
   userId: { type: String },
+  _id: { type: mongoose.SchemaTypes.ObjectId },
 });
 
 export const Expense = mongoose.model<IExpense>('expenses', expenseSchema);

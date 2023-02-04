@@ -1,7 +1,7 @@
 import { Express, Request, Response } from 'express';
 import { check }  from 'express-validator';
 import { registerUser, authenticateUser, updateUser } from './controller/userController';
-import { createExpense } from './controller/expenseController';
+import { createExpense, updateExpense } from './controller/expenseController';
 import authValidate from './controller/authValidateController';
 
 function routes(app: Express) {
@@ -20,7 +20,7 @@ function routes(app: Express) {
   app.patch('/api/user', authValidate, updateUser);
 
   app.post('/api/expense', authValidate, createExpense);
-
+  app.patch('/api/expense/:id', authValidate, updateExpense);
 }
 
 export default routes;

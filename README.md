@@ -92,7 +92,9 @@
 
   * **URL** `/api/user/`
 
-  * **Headers:** `"Content-Type": "aplication/json"`
+  * **Headers:** 
+    * `"Content-Type": "aplication/json"`
+    * `"Authorization": "Bearer <-YOU TOKEN->"`
 
   * **Data Params**: 
   ```typescript 
@@ -131,7 +133,7 @@
 
 ## **Expense**
 
-* ### *Create*
+* ### *CreatExpense*
   Creates a new expense
   <details>
 
@@ -146,7 +148,6 @@
   * **Data Params**: 
   ```typescript 
     {
-      expenseId: string,
       date: Date,
       account: string,
       category: string,
@@ -169,6 +170,7 @@
           "currency": "RUB",
           "comment": "supermarket Ashan",
           "userId": "63db54fe7332880adf6fef95",
+          "_id": "63dde034bc46ae6546fcf533",
         }
       ```
   * **Error Response:**
@@ -176,3 +178,4 @@
     * **Code:** 400	Bad Request <br />
 
   </details>
+<br />
