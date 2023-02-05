@@ -16,6 +16,15 @@ export interface IJwtToken extends IUserPayload {
   exp: number;
 }
 
+interface IUserResponse {
+  username: string;
+  email: string;
+  currency: string;
+  avatar: string;
+  language: string;
+  phoneNumber: number | null;
+}
+
 export async function registerUser(req: Request, res: Response) {
   try {
     const errors = validationResult(req);
@@ -24,7 +33,7 @@ export async function registerUser(req: Request, res: Response) {
       return res.status(403).json({ message:'Registration error', errors });
     }
 
-    const { email, username, password } = req.body;
+    const { email, username, password, currency } = req.body;
     const userEmail = await User.findOne({ email });
 
     if (userEmail) {
@@ -38,6 +47,7 @@ export async function registerUser(req: Request, res: Response) {
       email: email,
       username: username,
       password: hashPassword,
+      currency: currency,
     });
 
     return res.status(201).json({ message: 'User successfully registered' });
@@ -50,22 +60,30 @@ export async function registerUser(req: Request, res: Response) {
 export async function authenticateUser(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const userAuth = await User.findOne({ email });
     
-    if (!user) {
+    if (!userAuth) {
       return res.status(403).json({ message: `Email ${email} not found` });
     }
 
-    const validPassword = bcrypt.compareSync(password, user.password);
+    const validPassword = bcrypt.compareSync(password, userAuth.password);
 
     if (!validPassword) {
       return res.status(403).json({ message: 'Invalid password, please try again!' });
     }
 
-    const payload: IUserPayload = { id: user._id, username: user.username };
+    const payload: IUserPayload = { id: userAuth._id, username: userAuth.username };
     const token: string = jwt.sign(payload, tokenSettings.secretKey, { expiresIn: tokenSettings.time } );
+    const user: IUserResponse = {
+      username: userAuth.username,
+      email: userAuth.email,
+      currency: userAuth.currency,
+      avatar: userAuth.avatar,
+      language: userAuth.language,
+      phoneNumber: userAuth.phoneNumber,
+    };
 
-    return res.status(200).json(token);
+    return res.status(200).json({ token, user });
   } catch (error) {
     console.log(error);
     res.status(403).json({ message: 'Login error' });
@@ -75,17 +93,29 @@ export async function authenticateUser(req: Request, res: Response) {
 export async function updateUser(req: Request, res: Response) {
   try {
     const userId = (req.user as IJwtToken).id;
-    const user = await User.findOneAndUpdate(
+    const userUpdate = await User.findOneAndUpdate(
       { '_id': userId },
       { $set: { ...req.body } },
       { returnDocument: 'after' });
 
-    if (user === null) {
-      res.sendStatus(404);
+    if (userUpdate === null) {
+      return res.status(404).json({ message: 'User not found' });
     } else {
-      res.status(200).json(user);
+      const user: IUserResponse = {
+        username: userUpdate.username,
+        email: userUpdate.email,
+        currency: userUpdate.currency,
+        avatar: userUpdate.avatar,
+        language: userUpdate.language,
+        phoneNumber: userUpdate.phoneNumber,
+      };
+      return res.status(200).json( user );
     }
+
   } catch (error) {
+    if (await User.findOne( { email: req.body.email } )) {
+      return res.status(403).json({ message: `A user with ${req.body.email} already exists` });
+    }
     console.log(error);
     res.sendStatus(400);
   }

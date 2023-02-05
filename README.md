@@ -27,19 +27,20 @@
       email: string;
       username: string;
       password: string;
+      currency: string,
     } 
   ```
 
   * **Success Response:**
 
-    * **Code:** 201	Created <br />
+    * **Code:** 201 Created <br />
       **Content:** 
       ```json
         { "message": "User successfully registered" }
       ```
   * **Error Response:**
 
-    * **Code:** 403	Forbidden <br />
+    * **Code:** 403 Forbidden <br />
       **Content:** 
       ```json
         { "message": "Registration error" }
@@ -70,7 +71,17 @@
     * **Code:** 200	Ok <br />
       **Content:** 
       ```json
-        { "jwt token" }
+        {
+          "token": "jwt token",
+          "user": {
+            "username",
+            "email",
+            "currency",
+            "avatar",
+            "language",
+            "phoneNumber"
+          }
+        }
       ```
   * **Error Response:**
 
@@ -97,10 +108,12 @@
   * **Data Params**: 
   ```typescript 
     {
-      username?: string;
-      avatar?: string;
-      language?: string;
-      phoneNumber?: number;
+        username?: string;
+        email?: string;
+        currency?: string;
+        avatar?: string;
+        language?: string;
+        phoneNumber?: number | null;
     } 
   ```
 
@@ -110,13 +123,15 @@
       **Content:** 
       ```json
       {
-        "_id": "63dd3ecab0785798e9d18c75",
-        "email": "test1@clone.com",
-        "username": "test",
-        "password": "encoded password",
-        "avatar": "img url",
-        "language": "RU",
-        "phoneNumber": "89001000000"
+        "user": {
+            "username",
+            "email",
+            "currency",
+            "avatar",
+            "language",
+            "phoneNumber"
+        },
+        "message": "Successfully updated"
       }
       ```
   * **Error Response:**
