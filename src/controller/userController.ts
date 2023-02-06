@@ -63,7 +63,7 @@ export async function authenticateUser(req: Request, res: Response) {
     const userAuth = await User.findOne({ email });
     
     if (!userAuth) {
-      return res.status(403).json({ message: `Email ${email} not found` });
+      return res.status(403).json({ message: `Email: ${email} not found` });
     }
 
     const validPassword = bcrypt.compareSync(password, userAuth.password);
@@ -83,7 +83,7 @@ export async function authenticateUser(req: Request, res: Response) {
       phoneNumber: userAuth.phoneNumber,
     };
 
-    return res.status(200).json({ token, user });
+    return res.status(200).json({ message: 'Login successful', token, user });
   } catch (error) {
     console.log(error);
     res.status(403).json({ message: 'Login error' });
@@ -109,7 +109,7 @@ export async function updateUser(req: Request, res: Response) {
         language: userUpdate.language,
         phoneNumber: userUpdate.phoneNumber,
       };
-      return res.status(200).json( user );
+      return res.status(200).json({ message: 'Successfully updated', user });
     }
 
   } catch (error) {

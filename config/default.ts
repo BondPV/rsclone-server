@@ -11,7 +11,7 @@ export const tokenSettings = {
   time: '24h',
 };
 
-export const defaultLanguage = 'RU';
+export const defaultLanguage = 'EN';
 export const defaultUserAvatar = 'https://github.com/BondPV/database/blob/main/images/avatarCatMoney.jpg?raw=true';
 export const defaultPhoneNumber = null;
 
