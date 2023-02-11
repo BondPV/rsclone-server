@@ -21,7 +21,6 @@ interface IUserResponse {
   email: string;
   currency: string;
   avatar: string;
-  language: string;
   phoneNumber: number | null;
 }
 
@@ -79,7 +78,6 @@ export async function authenticateUser(req: Request, res: Response) {
       email: userAuth.email,
       currency: userAuth.currency,
       avatar: userAuth.avatar,
-      language: userAuth.language,
       phoneNumber: userAuth.phoneNumber,
     };
 
@@ -106,7 +104,6 @@ export async function updateUser(req: Request, res: Response) {
         email: userUpdate.email,
         currency: userUpdate.currency,
         avatar: userUpdate.avatar,
-        language: userUpdate.language,
         phoneNumber: userUpdate.phoneNumber,
       };
       return res.status(200).json({ message: 'Successfully updated', user });

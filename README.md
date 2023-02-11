@@ -78,7 +78,6 @@
             "email",
             "currency",
             "avatar",
-            "language",
             "phoneNumber"
           }
         }
@@ -112,7 +111,6 @@
         email?: string;
         currency?: string;
         avatar?: string;
-        language?: string;
         phoneNumber?: number | null;
     } 
   ```
@@ -128,7 +126,6 @@
             "email",
             "currency",
             "avatar",
-            "language",
             "phoneNumber"
         },
         "message": "Successfully updated"

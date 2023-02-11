@@ -19,6 +19,7 @@ import {
 } from './controller/incomeController';
 
 import authValidate from './controller/authValidateController';
+import { sendMessage } from './controller/messageController';
 
 function routes(app: Express) {
   app.get('/healthcheck', (req: Request, res: Response) => {
@@ -46,6 +47,8 @@ function routes(app: Express) {
   app.delete('/api/income/:id', authValidate, deleteIncome);
   app.get('/api/income/:id', getIncome);
   app.get('/api/income', authValidate, getIncomes);
+
+  app.post('/api/message', authValidate, sendMessage);
 }
 
 export default routes;
