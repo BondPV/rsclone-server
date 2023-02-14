@@ -49,6 +49,8 @@ export async function registerUser(req: Request, res: Response) {
       currency: currency,
     });
 
+    
+
     return res.status(201).json({ message: 'User successfully registered' });
   } catch (error) {
     console.log(error);
@@ -113,6 +115,23 @@ export async function updateUser(req: Request, res: Response) {
     if (await User.findOne( { email: req.body.email } )) {
       return res.status(403).json({ message: `A user with ${req.body.email} already exists` });
     }
+    console.log(error);
+    res.sendStatus(400);
+  }
+}
+
+export async function getUserCategoriesExpense(req: Request, res: Response) {
+  try {
+    const userId = (req.user as IJwtToken).id;
+
+    const result = await User.findOne( { '_id': userId }, { '_id': 0, 'categoriesExpense': 1 } );
+
+    if (result === null) {
+      return res.status(404);
+    } else {
+      return res.status(200).json(result);
+    }
+  } catch (error) {
     console.log(error);
     res.sendStatus(400);
   }

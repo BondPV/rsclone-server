@@ -1,6 +1,11 @@
 import { Express, Request, Response } from 'express';
 import { check }  from 'express-validator';
-import { registerUser, authenticateUser, updateUser } from './controller/userController';
+import {
+  registerUser,
+  authenticateUser,
+  updateUser,
+  getUserCategoriesExpense,
+} from './controller/userController';
 
 import { 
   createExpense,
@@ -20,6 +25,7 @@ import {
 
 import authValidate from './controller/authValidateController';
 import { sendMessage } from './controller/messageController';
+import { createAccount, deleteAccount, getAccount, getAllAccounts, updateAccount } from './controller/accountController';
 
 function routes(app: Express) {
   app.get('/healthcheck', (req: Request, res: Response) => {
@@ -35,19 +41,30 @@ function routes(app: Express) {
   ], registerUser);
 
   app.patch('/api/user', authValidate, updateUser);
+  app.get('/api/user/categoriesExpense', authValidate, getUserCategoriesExpense);
 
+  // Expense routes
   app.post('/api/expense', authValidate, createExpense);
   app.patch('/api/expense/:id', authValidate, updateExpense);
   app.delete('/api/expense/:id', authValidate, deleteExpense);
   app.get('/api/expense/:id', getExpense);
   app.get('/api/expense', authValidate, getExpenses);
 
+  // Income routes
   app.post('/api/income', authValidate, createIncome);
   app.patch('/api/income/:id', authValidate, updateIncome);
   app.delete('/api/income/:id', authValidate, deleteIncome);
   app.get('/api/income/:id', getIncome);
   app.get('/api/income', authValidate, getIncomes);
 
+  // Account routes
+  app.post('/api/account', authValidate, createAccount);
+  app.patch('/api/account/:id', authValidate, updateAccount);
+  app.delete('/api/account/:id', authValidate, deleteAccount);
+  app.get('/api/account/:id', getAccount);
+  app.get('/api/account', authValidate, getAllAccounts);
+
+  // Messega routes
   app.post('/api/message', authValidate, sendMessage);
 }
 

@@ -8,7 +8,7 @@ async function sendMessageToTelegram(message: string) {
     const response = await fetch(url, { method: 'POST' });
 
     if (!response.ok) {
-      console.log(`Error! status: ${response.status}`);
+      console.log(`Message server error Error! status: ${response.status}`);
       return {
         status: response.status,
         message: 'Message server error',

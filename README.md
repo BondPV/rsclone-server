@@ -2,7 +2,7 @@
 
 ## Setup and Running
 
-- Use `node 16.x` or higher.
+- Use `node 18.x` or higher.
 - Install dependencies: `$ npm install`.
 - Start server: `$ npm run dev`.
 - Now you can send requests to the address: `http://localhost:3005/`

@@ -11,11 +11,11 @@ export const tokenSettings = {
   time: '24h',
 };
 
-export const defaultUserAvatar = 'https://github.com/BondPV/database/blob/main/images/avatarCatMoney.jpg?raw=true';
-export const defaultPhoneNumber = null;
-
 export const telegram = {
   url: 'https://api.telegram.org',
   token: '6127257686:AAEcZFgBiXQnkfL7BG30L9gw_6Up9Thv8p0',
   chat: '-860431449',
 };
+
+export const defaultUserAvatar = 'https://github.com/BondPV/database/blob/main/images/avatarCatMoney.jpg?raw=true';
+export const defaultPhoneNumber = null;
