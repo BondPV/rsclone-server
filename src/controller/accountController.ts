@@ -65,7 +65,7 @@ export async function getAccount(req: Request, res: Response) {
   }
 }
 
-export async function getAllAccounts(req: Request, res: Response) {
+export async function getAccounts(req: Request, res: Response) {
   try {
     const userId = (req.user as IJwtToken).id;
     const accounts = await Account.find({ 'userId': userId });

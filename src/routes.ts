@@ -1,31 +1,13 @@
 import { Express, Request, Response } from 'express';
 import { check }  from 'express-validator';
-import {
-  registerUser,
-  authenticateUser,
-  updateUser,
-  getUserCategoriesExpense,
-} from './controller/userController';
-
-import { 
-  createExpense,
-  updateExpense,
-  deleteExpense,
-  getExpense,
-  getExpenses, 
-} from './controller/expenseController';
-
-import { 
-  createIncome,
-  updateIncome,
-  deleteIncome,
-  getIncome,
-  getIncomes, 
-} from './controller/incomeController';
+import { registerUser, authenticateUser, updateUser, getUserCategoriesExpense } from './controller/userController';
+import { createExpense, updateExpense, deleteExpense, getExpense, getExpenses } from './controller/expenseController';
+import { createIncome, updateIncome, deleteIncome, getIncome, getIncomes } from './controller/incomeController';
+import { createAccount, deleteAccount, getAccount, getAccounts, updateAccount } from './controller/accountController';
+import { createCategory, deleteCategory, getCategories, getCategory, updateCategory } from './controller/categoryController';
+import { sendMessage } from './controller/messageController';
 
 import authValidate from './controller/authValidateController';
-import { sendMessage } from './controller/messageController';
-import { createAccount, deleteAccount, getAccount, getAllAccounts, updateAccount } from './controller/accountController';
 
 function routes(app: Express) {
   app.get('/healthcheck', (req: Request, res: Response) => {
@@ -62,7 +44,14 @@ function routes(app: Express) {
   app.patch('/api/account/:id', authValidate, updateAccount);
   app.delete('/api/account/:id', authValidate, deleteAccount);
   app.get('/api/account/:id', getAccount);
-  app.get('/api/account', authValidate, getAllAccounts);
+  app.get('/api/account', authValidate, getAccounts);
+
+  // Category routes
+  app.post('/api/category', authValidate, createCategory);
+  app.patch('/api/category/:id', authValidate, updateCategory);
+  app.delete('/api/category/:id', authValidate, deleteCategory);
+  app.get('/api/category/:id', getCategory);
+  app.get('/api/category', authValidate, getCategories);
 
   // Messega routes
   app.post('/api/message', authValidate, sendMessage);
