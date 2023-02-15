@@ -6,6 +6,7 @@ export interface IAccount extends mongoose.Document {
   icon: number,
   userId?: string,
   key?: string,
+  currency?: string,
 }
 
 const accountSchema = new mongoose.Schema({
@@ -13,6 +14,7 @@ const accountSchema = new mongoose.Schema({
   sum:  { type: Number, required: true },
   icon:  { type: String, required: true },
   key: { type: String },
+  currency:  { type: String },
   userId: { type: String },
   _id: { type: mongoose.SchemaTypes.ObjectId },
 });

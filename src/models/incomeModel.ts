@@ -13,7 +13,7 @@ const incomeSchema = new mongoose.Schema({
   date: { type: Date, required: true, default: new Date() },
   account:  { type: String, required: true },
   income:  { type: Number, required: true },
-  currency:  { type: String, required: true },
+  currency:  { type: String },
   comment: { type: String },
   userId: { type: String },
   _id: { type: mongoose.SchemaTypes.ObjectId },
