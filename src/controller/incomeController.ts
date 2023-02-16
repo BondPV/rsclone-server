@@ -87,16 +87,22 @@ export async function getIncomes(req: Request, res: Response) {
 
     const filter = getFilter(query, fields);
 
-    const incomes = await Income.find(
-      {
-        'userId': userId,
-        ...filter,
-        'date': { 
-          $gte: startDate,
-          $lte: endDate, 
+    const page = req.query.page ? +req.query.page : 0;
+    const limit = req.query.limit ? +req.query.limit : 0;
+
+    const incomes = await Income
+      .find(
+        {
+          'userId': userId,
+          ...filter,
+          'date': { 
+            $gte: startDate,
+            $lte: endDate, 
+          },
         },
-      },
-    );
+      )
+      .skip(page > 0 ? (page - 1) * limit : 0)
+      .limit(limit);
 
     if (incomes.length === 0) {
       res.sendStatus(404);
