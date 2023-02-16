@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { Income } from '../models/incomeModel';
 import { IJwtToken } from './userController';
+import getFilter from '../utils/getFilter';
+import { initDate } from '../../config/default';
 
 export async function createIncome(req: Request, res: Response) {
   try {
@@ -68,7 +70,33 @@ export async function getIncome(req: Request, res: Response) {
 export async function getIncomes(req: Request, res: Response) {
   try {
     const userId = (req.user as IJwtToken).id;
-    const incomes = await Income.find({ 'userId': userId });
+
+    const fields = ['account', 'currency' ];
+    const query = { 
+      account: req.query.account as string,
+      carrency: req.query.currency as string,
+    };
+
+    let startDate = initDate;
+    let endDate = new Date();
+
+    if (req.query.startDate && req.query.endDate) {
+      startDate = new Date(Date.parse(req.query.startDate as string));
+      endDate = new Date(Date.parse(req.query.endDate as string));
+    }
+
+    const filter = getFilter(query, fields);
+
+    const incomes = await Income.find(
+      {
+        'userId': userId,
+        ...filter,
+        'date': { 
+          $gte: startDate,
+          $lte: endDate, 
+        },
+      },
+    );
 
     if (incomes.length === 0) {
       res.sendStatus(404);
