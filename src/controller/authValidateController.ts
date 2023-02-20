@@ -16,7 +16,7 @@ function authValidate(req: Request, res: Response, next: NextFunction) {
     next();
   } catch (error) {
     console.log(error);
-    return res.status(403).json({ message: 'User not authorized' });
+    return res.status(403).json({ message: 'Server error' });
   }
 }
 

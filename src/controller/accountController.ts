@@ -35,6 +35,26 @@ export async function updateAccount(req: Request, res: Response) {
   }
 }
 
+export async function updateAccountSum(req: Request, res: Response) {
+  try {
+    const { updateSum } = req.body;
+
+    const account = await Account.findOneAndUpdate(
+      { '_id': req.params.id },
+      { $inc: { sum: updateSum } },
+      { returnDocument: 'after' });
+
+    if (account === null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(account);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+}
+
 export async function deleteAccount(req: Request, res: Response) {
   try {
     const account = await Account.findOneAndDelete({ '_id': req.params.id });

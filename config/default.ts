@@ -8,7 +8,7 @@ export const bcryptSaltRounds = 10;
 
 export const tokenSettings = {
   secretKey: 'MAPMoney',
-  time: '24h',
+  time: '30d',
 };
 
 export const telegram = {

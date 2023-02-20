@@ -3,7 +3,7 @@ import { check }  from 'express-validator';
 import { registerUser, authenticateUser, updateUser, getUserCategoriesExpense } from './controller/userController';
 import { createExpense, updateExpense, deleteExpense, getExpense, getExpenses } from './controller/expenseController';
 import { createIncome, updateIncome, deleteIncome, getIncome, getIncomes } from './controller/incomeController';
-import { createAccount, deleteAccount, getAccount, getAccounts, updateAccount } from './controller/accountController';
+import { createAccount, deleteAccount, getAccount, getAccounts, updateAccount, updateAccountSum } from './controller/accountController';
 import { createCategory, deleteCategory, getCategories, getCategory, updateCategory } from './controller/categoryController';
 import { sendMessage } from './controller/messageController';
 
@@ -42,6 +42,7 @@ function routes(app: Express) {
   // Account routes
   app.post('/api/account', authValidate, createAccount);
   app.patch('/api/account/:id', authValidate, updateAccount);
+  app.patch('/api/account/:id/sum', authValidate, updateAccountSum);
   app.delete('/api/account/:id', authValidate, deleteAccount);
   app.get('/api/account/:id', getAccount);
   app.get('/api/account', authValidate, getAccounts);
