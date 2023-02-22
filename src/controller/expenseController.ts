@@ -105,11 +105,8 @@ export async function getExpenses(req: Request, res: Response) {
       .skip(page > 0 ? (page - 1) * limit : 0)
       .limit(limit);
 
-    if (expenses.length === 0) {
-      res.sendStatus(404);
-    } else {
-      res.status(200).json(expenses);
-    }
+    res.status(200).json(expenses);
+
   } catch (error) {
     console.log(error);
     res.sendStatus(400);

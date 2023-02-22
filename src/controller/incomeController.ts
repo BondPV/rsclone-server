@@ -104,11 +104,7 @@ export async function getIncomes(req: Request, res: Response) {
       .skip(page > 0 ? (page - 1) * limit : 0)
       .limit(limit);
 
-    if (incomes.length === 0) {
-      res.sendStatus(404);
-    } else {
-      res.status(200).json(incomes);
-    }
+    res.status(200).json(incomes);
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
