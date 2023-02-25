@@ -1,6 +1,6 @@
 import { Express, Request, Response } from 'express';
 import { check }  from 'express-validator';
-import { registerUser, authenticateUser, updateUser, getUserCategoriesExpense } from './controller/userController';
+import { registerUser, authenticateUser, updateUser, getUserCategoriesExpense, updateUserPassword } from './controller/userController';
 import { createExpense, updateExpense, deleteExpense, getExpense, getExpenses } from './controller/expenseController';
 import { createIncome, updateIncome, deleteIncome, getIncome, getIncomes } from './controller/incomeController';
 import { createAccount, deleteAccount, getAccount, getAccounts, updateAccount, updateAccountSum } from './controller/accountController';
@@ -23,6 +23,7 @@ function routes(app: Express) {
   ], registerUser);
 
   app.patch('/api/user', authValidate, updateUser);
+  app.patch('/api/user/password', authValidate, updateUserPassword);
   app.get('/api/user/categoriesExpense', authValidate, getUserCategoriesExpense);
 
   // Expense routes

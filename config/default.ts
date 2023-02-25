@@ -20,4 +20,4 @@ export const telegram = {
 export const defaultUserAvatar = 'https://github.com/BondPV/database/blob/main/images/avatarCatMoney.jpg?raw=true';
 export const defaultPhoneNumber = null;
 
-export const initDate = new Date('2000-01-01');
+export const initDate = new Date('2020-01-01');

@@ -120,6 +120,30 @@ export async function updateUser(req: Request, res: Response) {
   }
 }
 
+export async function updateUserPassword(req: Request, res: Response) {
+  try {
+    const userId = (req.user as IJwtToken).id;
+
+    const { password } = req.body;
+    const hashPassword = bcrypt.hashSync(password, bcryptSaltRounds);
+
+    const userUpdate = await User.findOneAndUpdate(
+      { '_id': userId },
+      { $set: { password: hashPassword } },
+      { returnDocument: 'after' });
+
+    if (userUpdate === null) {
+      return res.status(404).json({ message: 'User not found' });
+    } else {
+      return res.status(200).json({ message: 'Password successfully updated' });
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+}
+
 export async function getUserCategoriesExpense(req: Request, res: Response) {
   try {
     const userId = (req.user as IJwtToken).id;
