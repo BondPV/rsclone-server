@@ -87,6 +87,9 @@ export async function getIncomes(req: Request, res: Response) {
 
     const filter = getFilter(query, fields);
 
+    const sortParam = req.query.sort || 'date';
+    const value = req.query.order ? (req.query.order === 'ASC' ? 1 : -1) : 1;
+
     const page = req.query.page ? +req.query.page : 0;
     const limit = req.query.limit ? +req.query.limit : 0;
 
@@ -101,6 +104,7 @@ export async function getIncomes(req: Request, res: Response) {
           },
         },
       )
+      .sort({ [`${sortParam}`] : value })
       .skip(page > 0 ? (page - 1) * limit : 0)
       .limit(limit);
 

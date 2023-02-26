@@ -17,7 +17,7 @@ export const telegram = {
   chat: '-860431449',
 };
 
-export const defaultUserAvatar = 'https://github.com/BondPV/database/blob/main/images/avatarCatMoney.jpg?raw=true';
+export const defaultUserAvatar = 'assets/avatars/default.svg';
 export const defaultPhoneNumber = null;
 
 export const initDate = new Date('2020-01-01');
