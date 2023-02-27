@@ -14,7 +14,7 @@ export const tokenSettings = {
 export const telegram = {
   url: 'https://api.telegram.org',
   token: '6127257686:AAEcZFgBiXQnkfL7BG30L9gw_6Up9Thv8p0',
-  chat: '-860431449',
+  chat: '-1001844850616',
 };
 
 export const defaultUserAvatar = 'assets/avatars/default.svg';
