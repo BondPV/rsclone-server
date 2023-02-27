@@ -79,6 +79,7 @@ export async function getIncomes(req: Request, res: Response) {
 
     let startDate = initDate;
     let endDate = new Date();
+    endDate.setHours(23, 59, 59);
 
     if (req.query.startDate && req.query.endDate) {
       startDate = new Date(Date.parse(req.query.startDate as string));
