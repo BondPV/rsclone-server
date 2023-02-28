@@ -43,6 +43,8 @@
     * **Code:** 403 Forbidden <br />
       **Content:** 
       ```json
+        { "message": "A user with email already exists" }
+        or
         { "message": "Registration error" }
       ```
 
@@ -72,13 +74,14 @@
       **Content:** 
       ```json
         {
+          "message": "Login successful",
           "token": "jwt token",
           "user": {
-            "username",
-            "email",
-            "currency",
-            "avatar",
-            "phoneNumber"
+            "username": "Pavel",
+            "email": "pavel@mail.ru",
+            "currency": "USD",
+            "avatar": "assets/avatars/default.svg",
+            "phoneNumber": null
           }
         }
       ```
@@ -87,6 +90,10 @@
     * **Code:** 403	Forbidden <br />
       **Content:** 
       ```json
+        { "message": "Email: email not found" }
+        or
+        { "message": "Invalid password, please try again!" }
+        or
         { "message": "Login error" }
       ```
 
@@ -122,13 +129,51 @@
       ```json
       {
         "user": {
-            "username",
-            "email",
-            "currency",
-            "avatar",
-            "phoneNumber"
-        },
+          "username": "Pavel",
+          "email": "pavel@mail.ru",
+          "currency": "USD",
+          "avatar": "assets/avatars/default.svg",
+          "phoneNumber": 0
+        }
         "message": "Successfully updated"
+      }
+      ```
+  * **Error Response:**
+
+    * **Code:** 404 Not found
+
+      or
+
+    * **Code:** 400 Bad Request
+
+  </details>
+
+* ### *update User Password*
+  Updating user password.
+  <details>
+
+  * **Method** `PATCH`
+
+  * **URL** `/api/user/password`
+
+  * **Headers:** 
+    * `"Content-Type": "aplication/json"`
+    * `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Data Params**: 
+  ```typescript 
+    {
+      password: string;
+    } 
+  ```
+
+  * **Success Response:**
+
+    * **Code:** 200 Ok <br />
+      **Content:** 
+      ```json
+      {
+        "message": "Password successfully updated"
       }
       ```
   * **Error Response:**
@@ -317,6 +362,26 @@
   * **URL** `/api/expense`
 
   * **Headers:**: `"Authorization": "Bearer <-YOU TOKEN->"`
+
+  * **Query Params**: Optional:
+
+    _startDate=[string]
+
+    _endDate=[string]
+
+    _account=[string]
+
+    _category=[string]
+
+    _currency=[string]
+
+    _page=[integer]
+
+    _limit=[integer]
+
+    _sort=['date' | 'expense' | 'category']
+
+    _order=['ASC' | 'DESC']
 
   * **Data Params**: None
 
@@ -511,6 +576,24 @@
 
   * **URL** `/api/income`
 
+    * **Query Params**: Optional:
+
+    _startDate=[string]
+
+    _endDate=[string]
+
+    _account=[string]
+
+    _currency=[string]
+
+    _page=[integer]
+
+    _limit=[integer]
+
+    _sort=['date' |'income']
+    
+    _order=['ASC' | 'DESC']
+
   * **Headers:**: `"Authorization": "Bearer <-YOU TOKEN->"`
 
   * **Data Params**: None
@@ -532,5 +615,43 @@
       or
 
     * **Code:** 400 Bad Request
+
+  </details>
+
+## **Message**
+
+* ### *Send message*
+  Send message to telegram
+  <details>
+
+  * **Method** `POST`
+
+  * **URL** `/api/message`
+
+  * **Headers:** `"Content-Type": "aplication/json"`
+
+  * **Data Params**: 
+  ```typescript 
+    {
+      "email": "string",
+      "username": "string",
+      "message": "string"
+    } 
+  ```
+
+  * **Success Response:**
+
+    * **Code:** 200 OK <br />
+      **Content:** 
+      ```json
+        { "message": "Message sent successfully" }
+      ```
+  * **Error Response:**
+
+    * **Code:** 403 Forbidden <br />
+      **Content:** 
+      ```json
+        { "message": "Message server error" }
+      ```
 
   </details>
